@@ -1,4 +1,4 @@
-FROM anthonyebert/docker-miniconda3
+FROM anthonyebert/docker-miniconda3:Debian8
 
 MAINTAINER antimon2 <antimon2.me@gmail.com>
 
@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" \
     && apt-get install -y \
     libzmq3-dev \
-    libzmq5
+    libzmq3
 
 # Install Julia0.6.0
 RUN mkdir -p /opt/julia-0.6.0 && \
