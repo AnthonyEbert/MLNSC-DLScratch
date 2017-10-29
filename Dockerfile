@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:4.3.14
+FROM anthonyebert/docker-miniconda3
 
 MAINTAINER antimon2 <antimon2.me@gmail.com>
 
