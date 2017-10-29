@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" \
     && apt-get install -y \
     libzmq3-dev \
-    libzmq3
+    libzmq5
 
 # Install Julia0.6.0
 RUN mkdir -p /opt/julia-0.6.0 && \
