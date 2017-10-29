@@ -68,3 +68,11 @@ EXPOSE 8888
 # Define default command.
 # CMD ["/opt/conda/bin/jupyter", "notebook", "--notebook-dir=/opt/notebooks", "--ip='*'", "--port=8888", "--no-browser"]
 CMD ["/bin/bash"]
+
+# Copy GUI things
+# https://github.com/rocker-org/rocker/wiki/Allowing-GUI-windows
+RUN COPY inst/.bash_aliases ~/.bash_aliases
+
+
+
+
