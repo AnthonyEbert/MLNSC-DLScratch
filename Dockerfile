@@ -1,6 +1,6 @@
-FROM anthonyebert/docker-miniconda3:Debian8
+FROM continuumio/miniconda3:4.3.14
 
-MAINTAINER antimon2 <antimon2.me@gmail.com>
+MAINTAINER Anthony Ebert <anthonyebert@gmail.com>
 
 # Install NumPy / Matplotlib / Jupyter.
 RUN /opt/conda/bin/conda install numpy matplotlib jupyter -y --quiet
@@ -11,6 +11,18 @@ RUN apt-get update \
     && apt-get install -y \
     libzmq3-dev \
     libzmq3
+
+# Install debian things
+RUN apt-get install -y x11-apps
+
+
+
+# Add user
+RUN adduser user --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+
+RUN echo "user:user" | chpasswd
+
+
 
 # Install Julia0.6.0
 RUN mkdir -p /opt/julia-0.6.0 && \
@@ -33,7 +45,7 @@ RUN CONDA_JL_HOME=/opt/conda /opt/julia/bin/julia -e 'Pkg.add("IJulia");Pkg.buil
 RUN PYTHON=/opt/conda/bin/python /opt/julia/bin/julia -e 'Pkg.add("PyPlot");using PyPlot'
 
 # Dependencies for ACEMS workshop
-RUN julia -e 'Pkg.update(); Pkg.update(); Pkg.add("DataFrames"); Pkg.add("DataStructures"); Pkg.add("Distributions"); Pkg.add("JSON"); Pkg.add("Iterators")'
+# RUN julia -e 'Pkg.update(); Pkg.update(); Pkg.add("DataFrames"); Pkg.add("DataStructures"); Pkg.add("Distributions"); Pkg.add("JSON"); Pkg.add("Iterators")'
 
 
 
