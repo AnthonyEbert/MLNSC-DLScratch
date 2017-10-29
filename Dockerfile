@@ -35,32 +35,7 @@ RUN PYTHON=/opt/conda/bin/python /opt/julia/bin/julia -e 'Pkg.add("PyPlot");usin
 # Dependencies for ACEMS workshop
 RUN julia -e 'Pkg.update(); Pkg.update(); Pkg.add("DataFrames"); Pkg.add("DataStructures"); Pkg.add("Distributions"); Pkg.add("JSON"); Pkg.add("Iterators")'
 
-# v0.3: add_iruby: install requirements
-RUN apt-get install -y \
-    gawk g++ gcc libssl-dev make libc6-dev zlib1g-dev libyaml-dev libsqlite3-dev sqlite3 \
-    autoconf libgmp-dev libgdbm-dev libncurses5-dev automake libtool bison pkg-config \
-    libffi-dev libgmp-dev libreadline6-dev 
 
-# v0.4: add_iruby: install ruby-2.4.1
-RUN cd ~ && curl -o ruby-2.4.1.tar.gz http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz && \
-    tar zxvf ruby-2.4.1.tar.gz && \
-    cd ruby-2.4.1 && \
-    ./configure --prefix=/usr/local --disable-install-doc && \
-    make && make install && \
-    cd ~ && rm -rf ruby-2.4.1
-
-# v0.3: add_iruby: install iruby
-RUN gem install cztop --no-rdoc --no-ri
-RUN cd ~ && git clone https://github.com/zeromq/czmq && \
-    cd czmq && \
-    ./autogen.sh && ./configure && make && make install && \
-    cd ~ && rm -rf czmq
-RUN gem install iruby --no-rdoc --no-ri
-RUN IPYTHONDIR=/opt/conda/share/jupyter iruby register --force
-
-# v0.3: add_iruby: install related library and gems
-RUN apt-get install -y gnuplot && \
-    gem install pry pry-doc numo-narray numo-gnuplot --no-rdoc --no-ri
 
 # Define working directory.
 WORKDIR /opt/notebooks
