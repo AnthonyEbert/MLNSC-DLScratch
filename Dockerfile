@@ -2,6 +2,9 @@ FROM continuumio/miniconda3:4.3.14
 
 MAINTAINER Anthony Ebert <anthonyebert@gmail.com>
 
+# Install debian things
+RUN apt-get install -y x11-apps r-base
+
 # Install NumPy / Matplotlib / Jupyter.
 RUN /opt/conda/bin/conda install numpy matplotlib jupyter -y --quiet
 
@@ -11,11 +14,6 @@ RUN apt-get update \
     && apt-get install -y \
     libzmq3-dev \
     libzmq3
-
-# Install debian things
-RUN apt-get install -y x11-apps
-
-
 
 # Add user
 RUN adduser user --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
