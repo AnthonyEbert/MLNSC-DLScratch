@@ -32,6 +32,9 @@ RUN CONDA_JL_HOME=/opt/conda /opt/julia/bin/julia -e 'Pkg.add("IJulia");Pkg.buil
 # Install PyPlot with using installed matplotlib, and then precompile it
 RUN PYTHON=/opt/conda/bin/python /opt/julia/bin/julia -e 'Pkg.add("PyPlot");using PyPlot'
 
+# Dependencies for ACEMS workshop
+RUN julia -e 'Pkg.update(); Pkg.update(); Pkg.add("DataFrames"); Pkg.add("DataStructures"); Pkg.add("Distributions"); Pkg.add("JSON"); Pkg.add("Iterators")'
+
 # v0.3: add_iruby: install requirements
 RUN apt-get install -y \
     gawk g++ gcc libssl-dev make libc6-dev zlib1g-dev libyaml-dev libsqlite3-dev sqlite3 \
